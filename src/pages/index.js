@@ -11,6 +11,7 @@ import FaHeart from 'react-icons/lib/fa/heart';
 import Icon from '../components/Icons';
 import Popover from '../components/Popover';
 import Img from "gatsby-image";
+import { Flex } from 'rebass'
 
 
 //@import url('https://fonts.googleapis.com/css?family=PT Serif');
@@ -31,6 +32,7 @@ const img=css`
     width: 196px;
     height:196px;
 `
+
 const a=css`
     display:flex;
     font-size: 70px;
@@ -152,10 +154,9 @@ export default ({data}) => {
                                     </div>
                                 </div>
                             </div>
-
-                            <div className={a}>
+                            <Flex is='h1' justifyContent='center' pb={['200px','340px']}>
                                 <p className={b}><span className={c}>Treks, Hikes &</span>Find Local Guides </p>
-                            </div>
+                            </Flex>
                         </div>
 
                     </BackGroundImage>

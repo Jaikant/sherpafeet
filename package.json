@@ -36,6 +36,7 @@
     "react-typography": "^0.16.13",
     "rebass": "^2.1.0",
     "styled-components": "^3.4.2",
+    "styled-system": "^3.0.2",
     "typography": "^0.16.17",
     "typography-theme-funston": "^0.15.10",
     "typography-theme-grand-view": "^0.15.10",

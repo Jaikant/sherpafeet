@@ -1,19 +1,27 @@
-import React, { Component } from 'react';
-import { css } from 'react-emotion';
-import {Link} from 'gatsby';
-import FaAlignJustify from 'react-icons/lib/fa/align-justify';
+import React, { Component } from 'react'
+import { css } from 'react-emotion'
+import { Link } from 'gatsby'
+import { NavLink, Image } from 'rebass'
+import FaAlignJustify from 'react-icons/lib/fa/align-justify'
+import { Menu, Icon } from 'antd';
+
+const SubMenu = Menu.SubMenu;
+const MenuItemGroup = Menu.ItemGroup;
 
 const topnav = css`
     box-shadow:0px 1px 8px -2px #000000;
-    display:flex;                                      
+    display:flex;    
+    position: fixed;
+    background: white;
+    width: 100%;
+    top: 0;                                  
 `
 const logo = css`
     width:200px;
     top: 15%;
     left: 5%;
-    position: absolute;
 `
-const nav = css`
+const DesktopNav = css`
     display:flex;                                                        
     flex:5;                                                                
     align-items:center;                                                                                                   
@@ -22,72 +30,13 @@ const nav = css`
     font-weight: bold;
     text-transform: uppercase;
     font-family:Helvetica Neue,Helvetica,Arial,sans-serif;  
-    @media all and (max-width: 850px) {
-        flex-wrap: wrap;
-    }
-    @media all and (max-width: 750px) {
+    @media all and (max-width: 768px) {
         flex-wrap: wrap;
         display:none;
     }     
 `
-const navli = css`
-    white-space:nowrap;  
-    text-align:center;
-    flex:1;                                                            
-    color: rgba(59,89,152,.6);
-    text-decoration:none;
-    letter-spacing:3px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s; 
-    &:hover {
-        color: #23527c;
-      }
-`
-const dropdownitemstyle = css`
-      display:block;
-      position:absolute;
-      background-color:white;
-      left:-40px;
-      min-width:268px;
-      z-index:1;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      & a {
-        display: block;
-        text-transform: uppercase;
-        text-decoration:none;
-        letter-spacing: .1em;
-        margin: 16px;
-        color:rgba(59,89,152,.6);
-      }
-      & a:hover {
-        color: #23527c;
-      } 
-`
-const dropdownMenustyle = css`
-      position:relative;
-      display:inline-block;
-      margin:auto;
-      & span{
-          font-weight:bold;   
-      }
-      & div{
-          display:none;    
-      }
-      & :hover{
-          & div{
-              ${dropdownitemstyle}
-          }
-      }
-`
 const space = css`
     flex:3
-`
-const navDiv = css`
-    text-align:center;
-    flex:1;
-    @media all and (max-width: 750px) {
-        flex-basis: 100%;
-}
 `
 const burgerbutton = css`
     position: absolute;
@@ -95,7 +44,7 @@ const burgerbutton = css`
     color:#3b5998;
     right: 5%;
     font-size:32px;
-    @media all and (max-width: 750px) {
+    @media all and (max-width: 768px) {
         display:block;
     }
 `
@@ -136,6 +85,72 @@ const btnClose = css`
     text-decoration:none;
 `
 
+const noTypographyMargin = css`
+    li {
+        margin: 0px;
+    }
+`
+
+class NavigationBar extends React.Component {
+    state = {
+        current: 'mail',
+    }
+    handleClick = (e) => {
+        console.log('click ', e);
+    }
+
+    render() {
+        return (
+            <Menu
+                onClick={this.handleClick}
+                selectedKeys={[this.state.current]}
+                mode="horizontal"
+                className={noTypographyMargin}
+            >
+                <Menu.Item key="mail">
+                    <Icon type="heart" /> Find & Review Guides
+                </Menu.Item>
+
+                <SubMenu title={<span>Treks</span>}>
+                    <MenuItemGroup title="India">
+                        <Menu.Item key="setting:1"> Indian Himalayas </Menu.Item>
+                        <Menu.Item key="setting:2">Uttarakhand Treks</Menu.Item>
+                        <Menu.Item key="setting:3">Himachal Treks</Menu.Item>
+                        <Menu.Item key="setting:4">Ladakh Treks</Menu.Item>
+                        <Menu.Item key="setting:5">Lahaul Spiti Treks</Menu.Item>
+                    </MenuItemGroup>
+                    <MenuItemGroup title="Nepal">
+                        <Menu.Item key="setting:6" disabled>Coming Soon</Menu.Item>
+                    </MenuItemGroup>
+                </SubMenu>
+
+                <SubMenu title={<span>About</span>}>
+                    <Menu.Item key="app">
+                        <NavLink>
+                            <Icon type="appstore" />About Us
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="app2">
+                        <NavLink>
+                            <Icon type="rocket" />Mission
+                        </NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="app3">
+                        <NavLink>
+                            <Icon type="form" />Contact
+                        </NavLink>
+                    </Menu.Item>
+                </SubMenu>
+
+                <Menu.Item key="app4">
+                    <Icon type="login" />Login
+                </Menu.Item>
+            </Menu>
+        )
+    }
+}
+
+
 class Nav extends Component {
     constructor(props) {
         super(props);
@@ -146,7 +161,6 @@ class Nav extends Component {
 
     openSlideMenu() {
         this.setState({ isSlideOpen: `open`, width: `300px` });
-        console.log("clicked");
     }
 
     closeSlideMenu() {
@@ -155,22 +169,23 @@ class Nav extends Component {
 
 
     render() {
-        //const isSlideOpen = this.state.isSlideOpen;
-
         const menuState = css`
             width: ${this.state.width};
         `
         return (
             <div className={topnav}>
-                <div className={logo}><Link to="/"><img src="https://sherpafeet.com/assets/767ae8db.png" alt="sherpafeet brand logo" /></Link></div>
+
+                <NavLink href="/"> <Image m={1} width={200} src="https://sherpafeet.com/assets/767ae8db.png" alt="sherpafeet brand logo" /></NavLink>
+
                 <div className={space}></div>
+
 
                 <div className={burgerbutton}>
                     <a onClick={this.openSlideMenu}><FaAlignJustify /></a>
                     <div className={`${sideNav} ${menuState}`}>
                         <Link to="#" className={btnClose} onClick={this.closeSlideMenu}>&times;</Link>
                         <div className={`${logo} ${logoSideNav}`}><img src="https://sherpafeet.com/assets/767ae8db.png" alt="sherpafeet brand logo" /></div>
-                        <a className={sideNavLink} href="#">Find & Review Guides</a>
+                        <NavLink>Find & Review Guides</NavLink>
                         <a className={sideNavLink} href="#">Indian Himalayas</a>
                         <a className={sideNavLink} href="#">Uttarakhand Treks</a>
                         <a className={sideNavLink} href="#">Himachal Treks</a>
@@ -182,36 +197,9 @@ class Nav extends Component {
                     </div>
                 </div>
 
-                <nav className={nav}>
-                    <div className={navDiv}>
-                        <Link to="/guides/" className={navli}>Find & Review Guides</Link>
-                    </div>
-                    <div className={`${dropdownMenustyle} ${navDiv}`}>
-                        <Link className={navli}>Treks</Link>
-                        <div className={dropdownitemstyle}>
-                            <a href="#">Indian Himalayas</a>
-                            <a href="#">Uttarakhand Treks</a>
-                            <a href="#">Himachal Treks</a>
-                            <a href="#">Ladakh Treks</a>
-                            <a href="#">Lahaul Spiti Treks</a>
-                        </div>
-                    </div>
-
-                    <div className={`${dropdownMenustyle} ${navDiv}`}>
-                        <Link className={navli}>About</Link>
-                        <div className={dropdownitemstyle}>
-                            <a href="/aboutus/">About Us</a>
-                            <a href="#">Mission</a>
-                            <a href="#">Contact</a>
-                        </div>
-                    </div>
-
-                    <div className={navDiv}>
-                        <Link to="/login/" className={navli}>Log In</Link>
-                    </div>
+                <nav className={DesktopNav}>
+                    <NavigationBar />
                 </nav>
-
-
             </div>
         )
     }
