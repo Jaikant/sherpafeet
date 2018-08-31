@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { css } from 'react-emotion';
+import styled, { css } from 'react-emotion';
 import { Link } from 'gatsby';
 import Layout from '../components/Layout';
 import FaFacebook from 'react-icons/lib/fa/facebook';
@@ -16,7 +16,7 @@ import Img from "gatsby-image";
 //@import url('https://fonts.googleapis.com/css?family=PT Serif');
 //import { slide as BurgerMenu } from 'react-burger-menu'
 
-const bg = css`
+const BackGroundImage = styled.div`
     background-image:url('https://sherpafeet.com/img/chandrataal.png');
     background-repeat: no-repeat;
     background-size: cover;
@@ -133,7 +133,7 @@ export default ({data}) => {
       
     return (<div>
                 <Layout>  
-                    <div className={bg}> 
+                    <BackGroundImage> 
                         <div className={container}>
                             <div className={contain}>
                                 <img className={img} src="https://sherpafeet.com/assets/31c8c0d6.png" alt="sherpafeet logo" />
@@ -158,7 +158,7 @@ export default ({data}) => {
                             </div>
                         </div>
 
-                    </div>
+                    </BackGroundImage>
                     <h2 className={guideText}>Guide Spotlight (Based on most reviews)</h2>
 
                     <div className={card}>
@@ -191,7 +191,6 @@ export default ({data}) => {
                             
                     </div>  
                     </div>
-                    
             </Layout>  
         </div> 
     )
@@ -233,48 +232,3 @@ export const query = graphql`
 
        
 `
-
-
-// export const query = graphql`
-//   query IndexQuery1 {
-//             mongodbTestGuides(uid: {eq: "RajeshThakur"}) {
-//                     businessname
-//                     firstname
-//                     lastname
-//                     age
-//                     address {
-//                                 city
-//                                 state
-//                             }
-//                     startwork
-//                     rating
-//                     info {
-//                         bmc
-//                         amc
-//                         moi
-//                         english
-//                         sar
-//                       }
-                    
-//             }
-//     }
-
-       
-// `
-
-  
-
-// export const query = graphql`
-//   query IndexQuery1 
-//         {
-//             allMongodbTestGuides{
-//                 edges{
-//                     node{
-//                         uid
-//                         firstname
-//                     }
-//                 }
-//             }
-//         }
-    
-// `
