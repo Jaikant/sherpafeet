@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import { NavLink, Image } from 'rebass'
 import FaAlignJustify from 'react-icons/lib/fa/align-justify'
 import { Menu, Icon } from 'antd';
+import { slide as BurgerMenu } from 'react-burger-menu'
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -108,7 +109,10 @@ class NavigationBar extends React.Component {
                 className={noTypographyMargin}
             >
                 <Menu.Item key="mail">
-                    <Icon type="heart" /> Find & Review Guides
+                    <Link to="/guides">
+                        <Icon type="heart" /> 
+                        Find & Review Guides
+                    </Link>
                 </Menu.Item>
 
                 <SubMenu title={<span>Treks</span>}>
@@ -150,28 +154,55 @@ class NavigationBar extends React.Component {
     }
 }
 
-
+var styles = {
+    bmBurgerButton: {
+      position: 'fixed',
+      width: '36px',
+      height: '50px',
+      right: '24px',
+      top: '16px'
+    },
+    bmBurgerBars: {
+      background: '#373a47'
+    },
+    bmCrossButton: {
+      height: '36px',
+      width: '36px',
+    },
+    bmCross: {
+      background: '#bdc3c7'
+    },
+    bmMenu: {
+      padding: '2.5em 1.5em 0',
+      fontSize: '1.15em',
+      background: 'white'
+    },
+    bmOverlay: {
+        top: 0,
+        left: 0,
+      }
+  }
+  
+  
 class Nav extends Component {
     constructor(props) {
         super(props);
-        this.openSlideMenu = this.openSlideMenu.bind(this);
+        this.toggleSlideMenu = this.toggleSlideMenu.bind(this);
         this.closeSlideMenu = this.closeSlideMenu.bind(this);
-        this.state = { isSlideOpen: `closed`, width: `0px` };
+        this.state = { isMenuOpen: false };
     }
 
-    openSlideMenu() {
-        this.setState({ isSlideOpen: `open`, width: `300px` });
+    toggleSlideMenu() {
+        this.setState({ isMenuOpen: !this.state.isMenuOpen });
     }
 
     closeSlideMenu() {
-        this.setState({ isSlideOpen: `closed`, width: `0px` });
+        this.setState({ isMenuOpen: false });
     }
 
 
     render() {
-        const menuState = css`
-            width: ${this.state.width};
-        `
+        console.log("the menu is open:", this.state.isMenuOpen)
         return (
             <div className={topnav}>
 
@@ -179,23 +210,17 @@ class Nav extends Component {
 
                 <div className={space}></div>
 
-
-                <div className={burgerbutton}>
-                    <a onClick={this.openSlideMenu}><FaAlignJustify /></a>
-                    <div className={`${sideNav} ${menuState}`}>
-                        <Link to="#" className={btnClose} onClick={this.closeSlideMenu}>&times;</Link>
-                        <div className={`${logo} ${logoSideNav}`}><img src="https://sherpafeet.com/assets/767ae8db.png" alt="sherpafeet brand logo" /></div>
-                        <NavLink>Find & Review Guides</NavLink>
-                        <a className={sideNavLink} href="#">Indian Himalayas</a>
-                        <a className={sideNavLink} href="#">Uttarakhand Treks</a>
-                        <a className={sideNavLink} href="#">Himachal Treks</a>
-                        <a className={sideNavLink} href="#">Ladakh Treks</a>
-                        <a className={sideNavLink} href="#">Lahaul Spiti Treks</a>
-                        <a className={sideNavLink} href="#">About Us</a>
-                        <a className={sideNavLink} href="#">Mission</a>
-                        <a className={sideNavLink} href="#">Contact</a>
-                    </div>
-                </div>
+                <BurgerMenu 
+                    customBurgerIcon={ <FaAlignJustify /> } 
+                    styles={styles} 
+                    width={ '40%' } 
+                    isOpen={this.state.isMenuOpen} 
+                    right
+                >
+                    <a  href="/">Home</a>
+                    <a  href="/about">About</a>
+                    <a  href="/contact">Contact</a>
+                </BurgerMenu>
 
                 <nav className={DesktopNav}>
                     <NavigationBar />
