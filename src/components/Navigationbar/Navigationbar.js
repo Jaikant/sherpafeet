@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { css } from 'react-emotion'
+import styled, { css } from 'react-emotion'
 import { Link } from 'gatsby'
 import { NavLink, Image } from 'rebass'
 import FaAlignJustify from 'react-icons/lib/fa/align-justify'
@@ -17,12 +17,7 @@ const topnav = css`
     width: 100%;
     top: 0;                                  
 `
-const logo = css`
-    width:200px;
-    top: 15%;
-    left: 5%;
-`
-const DesktopNav = css`
+const DesktopNav = styled.nav`
     display:flex;                                                        
     flex:5;                                                                
     align-items:center;                                                                                                   
@@ -39,60 +34,19 @@ const DesktopNav = css`
 const space = css`
     flex:3
 `
-const burgerbutton = css`
-    position: absolute;
+const MobileNav = styled.div`
     display:none;
-    color:#3b5998;
-    right: 5%;
-    font-size:32px;
     @media all and (max-width: 768px) {
         display:block;
     }
 `
-const logoSideNav = css`
-    position:absolute;
-    top:10px;
-    left:22px;                                              
-`
-const sideNav = css`
-    height:100%;
-    width:0px;
-    box-sizing:border-box;
-    position:fixed;
-    top:0;
-    right:0;
-    z-index:1;
-    background:#3b5998;
-    overflow-x:hidden;
-    padding-top:60px;
-    transition:0.5s;
-    font-family:Helvetica Neue,Helvetica,Arial,sans-serif;  
-`
-const sideNavLink = css`
-    padding:10px 10px 10px 30px;
-    text-decoration:none;
-    font-size:17px;
-    color:white;
-    display:block;
-    transition:0.3s;
-`
-const btnClose = css`
-    position:absolute;
-    top:0;
-    right:22px;
-    color:white;
-    font-size:36px;
-    margin-left:50px;
-    text-decoration:none;
-`
-
 const noTypographyMargin = css`
     li {
         margin: 0px;
     }
 `
 
-class NavigationBar extends React.Component {
+class AntdMenu extends React.Component {
     state = {
         current: 'mail',
     }
@@ -105,7 +59,8 @@ class NavigationBar extends React.Component {
             <Menu
                 onClick={this.handleClick}
                 selectedKeys={[this.state.current]}
-                mode="horizontal"
+                defaultOpenKeys={['treks']}
+                mode={this.props.mode}
                 className={noTypographyMargin}
             >
                 <Menu.Item key="mail">
@@ -210,21 +165,21 @@ class Nav extends Component {
 
                 <div className={space}></div>
 
-                <BurgerMenu 
-                    customBurgerIcon={ <FaAlignJustify /> } 
-                    styles={styles} 
-                    width={ '40%' } 
-                    isOpen={this.state.isMenuOpen} 
-                    right
-                >
-                    <a  href="/">Home</a>
-                    <a  href="/about">About</a>
-                    <a  href="/contact">Contact</a>
-                </BurgerMenu>
+                <MobileNav>
+                    <BurgerMenu 
+                        customBurgerIcon={ <FaAlignJustify /> } 
+                        styles={styles} 
+                        width={ '80%' } 
+                        isOpen={this.state.isMenuOpen} 
+                        right
+                    >
+                        <AntdMenu mode="inline"/>
+                    </BurgerMenu>
+                </MobileNav>
 
-                <nav className={DesktopNav}>
-                    <NavigationBar />
-                </nav>
+                <DesktopNav>
+                    <AntdMenu mode="horizontal"/>
+                </DesktopNav>
             </div>
         )
     }
