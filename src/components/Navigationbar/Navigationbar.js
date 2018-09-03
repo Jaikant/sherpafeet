@@ -85,19 +85,19 @@ class AntdMenu extends React.Component {
 
                 <SubMenu title={<span>About</span>}>
                     <Menu.Item key="app">
-                        <NavLink>
+                        <Link to="/aboutus">
                             <Icon type="appstore" />About Us
-                        </NavLink>
+                        </Link>    
                     </Menu.Item>
                     <Menu.Item key="app2">
-                        <NavLink>
+                        <Link>
                             <Icon type="rocket" />Mission
-                        </NavLink>
+                        </Link>
                     </Menu.Item>
                     <Menu.Item key="app3">
-                        <NavLink>
+                        <Link>
                             <Icon type="form" />Contact
-                        </NavLink>
+                        </Link>
                     </Menu.Item>
                 </SubMenu>
 
