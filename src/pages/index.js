@@ -11,7 +11,8 @@ import FaHeart from 'react-icons/lib/fa/heart';
 import Icon from '../components/Icons';
 import Popover from '../components/Popover';
 import Img from "gatsby-image";
-import { Flex } from 'rebass'
+import { Flex, Box } from 'rebass'
+import Card from '../components/Card'
 
 
 //@import url('https://fonts.googleapis.com/css?family=PT Serif');
@@ -118,22 +119,13 @@ const cardBlock = css`
     font-size:14px;
     color:#757575;
 `
-const symbolFull = css`
-    color: rgba(59,89,152,0.6);
-    font-size:16px;
-`
-const symbolEmpty = css`
-    color: #f4f4f4;
-    font-size:18px;
-`
-
     
 export default ({data}) => {
     const date = data.mongodbTestGuides.startwork;
     const year = date.substring(date.lastIndexOf('-')+1,date.length)
       
       
-    return (<div>
+    return (
                 <Layout>  
                     <BackGroundImage> 
                         <div className={container}>
@@ -161,39 +153,14 @@ export default ({data}) => {
 
                     </BackGroundImage>
                     <h2 className={guideText}>Guide Spotlight (Based on most reviews)</h2>
-
-                    <div className={card}>
-                        <Link to="#" className={cardTitle}><h5 className={cardh}>{data.mongodbTestGuides.businessname}</h5></Link>
-                        <Link to="#" className={cardimg}><img src={data.imageSharp.original.src}/></Link>
-                        
-                        <div className={cardBlock}>
-                            <span><strong>{data.mongodbTestGuides.firstname} {data.mongodbTestGuides.lastname}</strong></span>
-                            <div>Age {data.mongodbTestGuides.age}</div>
-                            <div>{data.mongodbTestGuides.address.city}, {data.mongodbTestGuides.address.state}</div>
-                            <div>Guiding work since <strong>{year}</strong></div>
-                            <Rating readonly={true} initialRating={data.mongodbTestGuides.rating} emptySymbol={<FaHeartO className={symbolEmpty}/>} fullSymbol={<FaHeart className={symbolFull}/>}/>              
-                            <div>
-                            <Popover  title="English" content="The guide can understand English.">
-                            <Icon icon="speaking"/>
-                            </Popover>
-                            <Popover  title="Basic Mountaineering" content="The guide has completed a certification in Basic Mountaineering.">
-                            <Icon icon="degree"/>
-                            </Popover>
-                            <Popover  title="Advanced Mountaineering" content="The guide has completed a certification in Advanced Mountaineering.">
-                            <Icon icon="certificate"/>
-                            </Popover>
-    
-                            <Popover  title="Methods Of Instruction" content="The guide is a trained instructor.">
-                            <Icon icon="degreecap"/>
-                            </Popover>
-                            
-                        </div>
-                            
-                            
-                    </div>  
-                    </div>
+                    <Flex justifyContent={"center"}>
+                        <Card 
+                            src={data.imageSharp.original.src}
+                            guide={data.mongodbTestGuides}
+                            year={year}
+                        />
+                    </Flex>
             </Layout>  
-        </div> 
     )
 }
 
@@ -204,7 +171,7 @@ export const query = graphql`
                     businessname
                     firstname
                     lastname
-                    age
+                    dateofbirth
                     address {
                                 city
                                 state

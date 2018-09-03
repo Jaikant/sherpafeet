@@ -3,7 +3,7 @@ import Navigationbar from './Navigationbar/Navigationbar';
 import SFFooter from './Footer/SFFooter';
 import styled, { css } from 'react-emotion';
 import { Layout } from 'antd'
-import { Box } from 'rebass'
+import { Box, Flex } from 'rebass'
 import { ThemeProvider } from 'emotion-theming'
 import { injectGlobal } from 'emotion'
 import Color from 'color';
@@ -73,14 +73,16 @@ const HeaderColor = css`
 `;
 
 const SFLayout = (props)=>(
-    <div>
+    <Box>
         <Navigationbar/>
         <SmallBanner mt={["70px"]}>
             sherpafeet.com is a free service to benefit trekkers and empower local guides. We do not take any money from guides or trekkers.
         </SmallBanner>
-        {props.children}
+        <Box p={[2, 3]}>
+          {props.children}
+        </Box>
         <SFFooter/>
-    </div>
+    </Box>
 )
 export default SFLayout;
 
