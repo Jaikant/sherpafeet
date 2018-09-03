@@ -1,61 +1,37 @@
 import React,{Component} from 'react';
-import { css } from 'react-emotion';
+import styled, { css } from 'react-emotion';
 import { Link } from 'gatsby';
+import { Flex, Box } from 'rebass';
+import StyledLink from '../StyledLink';
 
-const text = css`
-    color: rgba(255, 255, 255, 1);
-`
-const spacer = css`
+const StyledSpan = styled.span`
     color: rgba(255, 255, 255, 0.7);
+    padding: 2px;
 `
-const link = css`
-    color: rgba(255, 255, 255, 0.6);
-  font-size: 1em;
-  font-weight: 400;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  text-decoration: none;
-  -webkit-transition-duration: 0.4s;
-  transition-duration: 0.4s; 
-  &:hover {
-      color:  rgba(255, 255, 255, 1);;
-    }
-`
-const container = css`
-    margin: 0 auto;
-    padding: 20px 15px;
-    max-width: var(--max-content-width);
-    text-align: center; 
-    background: #3b5998;
-    color: #fff;
-    width: 100%;
-
-`
+const Dot = () => <StyledSpan>·</StyledSpan>
 
 const SFFooter=()=>(
-    <div className={container}>
-    <span className={text}>© sherpafeet</span>
-    <span className={spacer}>.</span>
-    <Link to="/" className={link}>Home</Link>
-    <span className={spacer}>.</span>
-    <Link to="#" className={link}>Blog</Link>
-    <span className={spacer}>.</span>
-    <Link to="#" className={link}>Why</Link>
-    <span className={spacer}>.</span>
-    <Link to="#" className={link}>Must know</Link>
-    <span className={spacer}>.</span>
-    <Link to="#" className={link}>Checklist</Link>
-    <span className={spacer}>.</span>
-    <Link to="#" className={link}>Terms & Conditions</Link>
-    <span className={spacer}>.</span>
-    <Link to="#" className={link}>Privacy Policy</Link>
-    <span className={spacer}>.</span>
-    <Link to="#" className={link}>Contact</Link>
-    <span className={spacer}>.</span>
-    <Link to="#" className={link}>Partners</Link>
-    </div>
+    <Flex bg={"#3b5998"} flexWrap="wrap" justifyContent="center" width={1} p={[1,3]}>
+        <Box color="white">© sherpafeet</Box>
+        <Dot/>
+        <StyledLink to="/">Home</StyledLink>
+        <Dot/>
+        <StyledLink to="#">Blog</StyledLink>
+        <Dot/>
+        <StyledLink to="#">Why</StyledLink>
+        <Dot/>
+        <StyledLink to="#">Must know</StyledLink>
+        <Dot/>
+        <StyledLink to="#">Checklist</StyledLink>
+        <Dot/>
+        <StyledLink to="#">Terms & Conditions</StyledLink>
+        <Dot/>
+        <StyledLink to="#">Privacy Policy</StyledLink>
+        <Dot/>
+        <StyledLink to="#">Contact</StyledLink>
+        <Dot/>
+        <StyledLink to="#">Partners</StyledLink>
+    </Flex>
 )
 
 export default SFFooter;
