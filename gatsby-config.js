@@ -9,7 +9,7 @@ module.exports = {
               {
                 resolve: `gatsby-source-mongodb`,
                 options: { dbName: `test`, 
-                           collection: [`treks`,`guides`,`rating`,`usrs`]
+                           collection: [`guides`,`ratings`,`usrs`,`blogs`,`departures`,`bookings`]
                          }
               },
               {
