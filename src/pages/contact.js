@@ -1,43 +1,41 @@
-import React, { Component } from "react";
 import Layout from "../components/Layout";
+import React,{Component} from 'react';
 import FaMobile from "react-icons/lib/fa/mobile";
-import styled from "react-emotion";
-import { css } from "react-emotion";
 import {
-  Box,
-  Heading,
-  Row,
-  Column,
-  Text,
-  NavLink,
-  Border,
-  Textarea,
+  Form,
+  Input,
+  Tooltip,
+  Icon,
+  Select,
+  Checkbox,
   Button,
-  Flex
-} from "rebass";
+ 
+ 
+} from "antd";
+import { Heading, Text, NavLink, Flex,Box } from "rebass";
 import IoEmail from "react-icons/lib/io/email";
 
-// const hr_ = styled('Text')`
-//   color: #757575;
+// import {
+//   Box,
+//   Heading,
+//   Row,
+//   Column,
+//   Text,
+//   NavLink,
+//   Border,
+//   Textarea,
+//   Flex
+// } from "rebass";
+// import IoEmail from "react-icons/lib/io/email";
 
-//   position: absolute;
-//   ::before {
-//     content: "---";
-//     width: 80px;
-//   }
-//   ::after {
-//     content: " ";
-
-// `;
-const StyledHeading = styled.heading`
+const StyledHeading = Box.extend`
   position: relative;
   z-index: 1;
-  display: block;
+  display: inline-block;
   margin-bottom: 15px;
-  width: 100%;
-  color: #757575;
+  color: #333;
   text-align: center;
-  font-size: 80%;
+  font-size: 100%;
   ::before {
     position: absolute;
     top: 50%;
@@ -52,178 +50,200 @@ const StyledHeading = styled.heading`
   }
   ::after {
     position: absolute;
-    top: 49%;
+    top: 50%;
+    right: 18%;
     z-index: -2;
     display: block;
-    width: 100%;
+    width: 80%;
+    margin-right: -40px;
     border-bottom: 1px solid #ddd;
     content: "";
   }
 `;
 
-export default () => {
-  return (
-    <div>
+const FormItem = Form.Item;
+const Option = Select.Option;
+
+const { TextArea } = Input;
+
+class RegistrationForm extends React.Component {
+  state = {
+    confirmDirty: false,
+    autoCompleteResult: []
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        console.log("Received values of form: ", values);
+      }
+    });
+  };
+
+  handleConfirmBlur = e => {
+    const value = e.target.value;
+    this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+  };
+
+  render() {
+    console.log("props", this.props);
+    console.log("form props", this.props.form);
+    const { getFieldDecorator } = this.props.form;
+    const { autoCompleteResult } = this.state;
+
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 }
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 }
+      }
+    };
+    const tailFormItemLayout = {
+      wrapperCol: {
+        xs: {
+          span: 24,
+          offset: 0
+        },
+        sm: {
+          span: 16,
+          offset: 8
+        }
+      }
+    };
+    const prefixSelector = getFieldDecorator("prefix", {
+      initialValue: "86" 
+    })(
+      <Select style={{ width: 70 }} >
+        <Option value="86">+86</Option>
+        <Option value="87">+87</Option>
+        <Option value="91">+91</Option>
+      </Select>
+    );
+    
+    
+
+    return (
       <Layout>
-        <Box bg="white" alignSelf="center" pt={40} pb={40}>
-          <Flex alignItems="center" flexDirection="row" justifyContent="center">
-            <center>
-              <Heading
-                is="p"
-                children="Our address is"
-                pt={40}
-                pr={0}
-                pl={0}
-                mb={10}
-                fontSize={24}
-                fontWeight={500}
-                color="#333"
-              />
-              <Text mt={10} mb={10} fontSize={14}>
-                1st Stage, 4th Block
-              </Text>
-              <Text mt={10} mb={10} fontSize={14}>
-                HBR Layout, Bangalore - 560043
-              </Text>
-              <Text mt={10} mb={10} fontSize={14}>
-                Karnataka, India
-              </Text>
+        <Flex
+          alignItems="center"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <Heading
+            children="Our address is"
+            m={[3, 4]}
+            
+            color="#757575"
+            fontSize={24}
+          />
+          <Text my={1} fontSize={"14px"} >
+            1st Stage, 4th Block
+          </Text>
+          <Text my={1} fontSize={"14px"}>
+            HBR Layout, Bangalore - 560043
+          </Text>
+          <Text my={1} fontSize={"14px"}>
+            Karnataka, India
+          </Text>
 
-              <Text fontSize={14}>
-                <FaMobile fontSize={18} fontWidth={24} />
-                9886106999
-              </Text>
-              <IoEmail fontSize={18} />
-              <NavLink
-                href="#!"
-                color="rgba(59,89,152,.6)"
-                fontWeight={400}
-                mb={40}
-                children="jai@sherpafeet.com"
-              />
-
-              
-              <StyledHeading color="#757575" mb={15} children="Contact Us" />
-
-             
-              <Flex
-                
-                flexWrap="wrap"
-                flexDirection="column"
-                justifyContent="center"
-              >
-                <Box width={[1, 1]} color="#333" bg="white">
-                  <Text
-                    fontWeight="bold"
-                    textAlign="left"
-                    pl={18}
-                    mb={2}
-                    mt={40}
-                    children="Name"
-                  />
-                  <Box width={[1, 1]} color="#333" bg="white">
-                    <Border
-                      py={20}
-                      width={350}
-                      borderColor="rgb(204, 204, 204)"
-                      mb={15}
-                      color="#757575"
-                    />
-                  </Box>
-                </Box>
-                <Box width={[1, 1]} color="#333" bg="white" mb={0}>
-                  <Row mb={0}>
-                    <Column>
-                      <Text
-                        fontWeight="bold"
-                        textAlign="left"
-                        pl={18}
-                        
-                        children="Mobile Number"
-                      />
-                      <Text
-                    textAlign="left"
-                    mb={-20}
-                    ml={18}
-                    fontSize={0}
-                    fontWeight="bold"
-                    children="919886198861)"
-                  />
-                    </Column>
-                    <Column>
-                      <Text
-                        fontSize={0}
-                        mt={2}
-                        ml={-100}
-                        textAlign='left'
-                        fontWeight="bold"
-                        children="(with country code, eg for India, "
-                      />
-                    </Column>
-                  </Row>
-                  
-                  <Box width={[1, 1]} color="#333" bg="white">
-                    <Border
-                      py={20}
-                      width={350}
-                      borderColor="rgb(204, 204, 204)"
-                      color="#757575"
-                      mb={15}
-                    />
-                  </Box>
-                </Box>
-                <Box width={[1, 1]} color="#333" bg="white">
-                  <Text
-                    fontWeight="bold"
-                    textAlign="left"
-                    pl={18}
-                    children="Email"
-                    mb={2}
-                  />
-                  <Box width={[1, 1]} color="#333" bg="white">
-                    <Border
-                      py={20}
-                      width={350}
-                      borderColor="rgb(204, 204, 204)"
-                      color="#757575"
-                      mb={15}
-                    />
-                  </Box>
-                </Box>
-                <Box width={[1, 1]} color="#333" bg="white">
-                  <Text
-                    fontWeight="bold"
-                    textAlign="left"
-                    pl={18}
-                    children="Message"
-                    mb={0}
-                  />
-                  <Box width={[1, 1]} p={3} color="#333" bg="white">
-                    <Textarea
-                      borderColor="rgb(204, 204, 204)"
-                      rows={4}
-                      width={350}
-                      color="#757575"
-                      border="bold"
-                    />
-                  </Box>
-                </Box>
-                <Box width={[1, 1]} color="#333" bg="white">
-                  <Button
-                    children="Submit"
-                    bg="rgba(59,89,152,.8)"
-                    px={150}
-                    py={15}
-                    bordertopColor="rgb(59, 89, 152)"
-                    borderRadius={5}
-                    color="#fff"
-                  />
-                </Box>
-              </Flex>
-            </center>
+          <Text my={1} fontSize={"14px"}>
+            <FaMobile fontSize={"18px"} />
+            9886106999
+          </Text>
+          <Flex>
+            <IoEmail height="35" fontSize={"18px"} />
+            <NavLink
+              href="mailto:jai@sherpafeet.com"
+              color="rgba(59,89,152,.6)"
+              fontWeight={400}
+              mb={10}
+              fontSize={"14px"}
+              children="jai@sherpafeet.com"
+            />
           </Flex>
-        </Box>
+          <StyledHeading
+            color="#757575"
+            width={[1, 1 / 3]}
+            m={-4}
+            p={5}
+            mb={[1,2,3]}
+            children="Contact Us"
+          />
+          <Flex flexWrap="wrap" justifyContent="center">
+            <Form onSubmit={this.handleSubmit} alignItems="center">
+              <FormItem
+                {...formItemLayout}
+                label={
+                  <span>
+                    Name&nbsp;
+                    <Tooltip title="What is your name?">
+                      <Icon type="question-circle-o" />
+                    </Tooltip>
+                  </span>
+                }
+              >
+                {getFieldDecorator("name", {
+                  rules: [
+                    {
+                      required: true,
+                      message: "Please input your name!",
+                      whitespace: true
+                    }
+                  ]
+                })(<Input />)}
+              </FormItem>
+              <FormItem
+          {...formItemLayout}
+          label="Mobile Number"
+        >
+          {getFieldDecorator('phone', {
+            rules: [{ required: true, message: 'Please input your mobile number!' }],
+          })(
+            <Input addonBefore={prefixSelector}  />
+          )}
+        </FormItem>
+              <FormItem {...formItemLayout} label="E-mail">
+                {getFieldDecorator("email", {
+                  rules: [
+                    {
+                      type: "email",
+                      message: "The input is not valid E-mail!"
+                    },
+                    {
+                      required: true,
+                      message: "Please input your E-mail!"
+                    }
+                  ]
+                })(<Input />)}
+              </FormItem>
+
+              <FormItem {...formItemLayout} label="Message" >
+                <TextArea rows={4} style={{width:280}} />
+              </FormItem>
+              <FormItem {...tailFormItemLayout}>
+                {getFieldDecorator("agreement", {
+                  valuePropName: "checked"
+                })(
+                  <Checkbox>
+                    I have read the <a href="">agreement</a>
+                  </Checkbox>
+                )}
+              </FormItem>
+              <FormItem {...tailFormItemLayout}>
+                <Button type="primary" htmlType="submit" style={{backgroundColor:'rgba(59,89,152,.6)' }}>
+                  Submit
+                </Button>
+              </FormItem>
+            </Form>
+          </Flex>
+        </Flex>
       </Layout>
-    </div>
-  );
-};
+    );
+  }
+}
+const WrappedRegistrationForm = Form.create()(RegistrationForm);
+export default WrappedRegistrationForm;
