@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Layout from "../components/Layout";
-import { Flex, Box, Text, Heading, NavLink } from "rebass";
+import { Flex, Box, Text, Heading } from "rebass";
 import styled from "react-emotion";
 import { Link } from "gatsby";
 
@@ -14,22 +14,16 @@ export default () => {
   return (
     <div>
       <Layout>
-        <Flex flexWrap="wrap" justifyConyent='center'>
-          <Box
-            width={[1, 1]}
-            p={[1, 2, 3]}
-            color="white"
-            bg="white"
-            textAlign="center"
-          >
-            <Text fontSize={18} color="#333" p={[10, 15, 20]} m={[10, 15, 20]} >
-              The guides on our platform is a carefully <strong>curated</strong> list from the
-              different valleys in the Himalayas. We have local businesses from
-              every significant valley in the himalayan region, making it easy
-              for you to book your treks and trips. We select only the most
-              capable guides to be on our platform. If you know of someone who
-              strongly deserves to be listed,{" "}
-              <NavLink
+        <Flex flexWrap="wrap" justifyConyent="center">
+          <Box width={[1, 1]} p={[1, 2, 3]} textAlign="center">
+            <Text fontSize={18} color="#333" p={[10, 15, 20]} m={[10, 15, 20]}>
+              The guides on our platform is a carefully <strong>curated</strong>{" "}
+              list from the different valleys in the Himalayas. We have local
+              businesses from every significant valley in the himalayan region,
+              making it easy for you to book your treks and trips. We select
+              only the most capable guides to be on our platform. If you know of
+              someone who strongly deserves to be listed,{" "}
+              <Link
                 to="/contact/"
                 fontSize={20}
                 ml={-2}

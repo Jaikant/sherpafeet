@@ -70,9 +70,9 @@ class AntdMenu extends React.Component {
                     </Link>
                 </Menu.Item>
 
-                <SubMenu title={<span>Treks</span>}>
+                <SubMenu title={<span>Treks</span>}> 
                     <MenuItemGroup title="India">
-                        <Menu.Item key="setting:1"> Indian Himalayas </Menu.Item>
+                        <Menu.Item key="setting:1"> Indian Himalayas<Link to="/treks"/></Menu.Item>
                         <Menu.Item key="setting:2">Uttarakhand Treks</Menu.Item>
                         <Menu.Item key="setting:3">Himachal Treks</Menu.Item>
                         <Menu.Item key="setting:4">Ladakh Treks</Menu.Item>
@@ -82,7 +82,7 @@ class AntdMenu extends React.Component {
                         <Menu.Item key="setting:6" disabled>Coming Soon</Menu.Item>
                     </MenuItemGroup>
                 </SubMenu>
-
+                   
                 <SubMenu title={<span>About</span>}>
                     <Menu.Item key="app">
                         <Link to="/aboutus/">
