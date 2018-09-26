@@ -53,30 +53,34 @@ export default ({ data }) => {
 
 export const query = graphql`
   query {
-            mongodbTestGuides (uid: {eq: "RajeshThakur"}){
-                    uid
-                    businessname
-                    firstname
-                    lastname
-                    age
-                    address {
-                                city
-                                country
-                            }
-                    startwork
-                    rating
-                    raters
-                    about
-                    info {
-                        bmc
-                        amc
-                        moi
-                        english
-                        sar
-                      }
-                      treks {
-                        trekname
-                      }
+            allMongodbTestGuides (filter:{uid:{eq:"RajeshThakur"}}){
+              edges{
+                node{
+                  uid
+                  businessname
+                  firstname
+                  lastname
+                  age
+                  address {
+                              city
+                              country
+                          }
+                  startwork
+                  rating
+                  raters
+                  about
+                  info {
+                      bmc
+                      amc
+                      moi
+                      english
+                      sar
+                    }
+                    treks {
+                      trekname
+                    }
+                }
+              }   
                     }
                     allImageSharp{
                         edges{

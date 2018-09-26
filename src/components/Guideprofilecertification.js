@@ -16,7 +16,7 @@ export default class Certifications extends Component {
 
     render() {
 
-        let guide = this.props.data.mongodbTestGuides;
+        let guide = (this.props.data.allMongodbTestGuides.edges.map(x=>x.node))[0];
 
         return (
             <Box bg='white' mt={2} id='link'>

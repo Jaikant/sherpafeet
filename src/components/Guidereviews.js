@@ -35,7 +35,7 @@ export default class Review extends Component {
 
     render() {
 
-        let guide = this.props.data.mongodbTestGuides;
+        let guide = (this.props.data.allMongodbTestGuides.edges.map(x=>x.node))[0];
 
         let usersArray = this.props.data.allMongodbTestUsrs.edges.map(x => x.node);
 

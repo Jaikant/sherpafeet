@@ -10,7 +10,9 @@ import { Flex, Box, Image, Border, Relative, Absolute, Text } from 'rebass';
 export default class Guideinfo extends Component {
     render() {
 
-        let guide = this.props.data.mongodbTestGuides;
+        let guide = (this.props.data.allMongodbTestGuides.edges.map(x=>x.node))[0];
+        console.log("guide is", guide);
+
 
         let imagePath = this.props.data.allImageSharp.edges.map(x => x.node.original.src);
 
