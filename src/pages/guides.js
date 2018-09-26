@@ -8,7 +8,6 @@ import Layout from '../components/Layout';
 import Sharebuttons from '../components/Sharebuttons';
 import Ratings from '../components/Rating';
 
-import Img from "gatsby-image";
 
 
 
@@ -20,15 +19,6 @@ const numberofGuides = css`
     font-family:PT Serif,serif;
     font-weight:500;
 `
-
-// const cardContainer = css`
-//     //padding:20px;
-//     display:flex;
-//     flex-wrap:wrap;
-//     justify-content:space-between;
-//     align-content:space between;
-
-// `
 const cards = css`
     display:flex;
     flex-wrap:wrap;
@@ -45,7 +35,6 @@ const incards = css`
     //align-content:space between;
     flex-basis:26%;
     //flex:2;
-
 `
 
 const spacing = css`
@@ -107,26 +96,30 @@ const cardBlock = css`
     
 
 `
-export default (props) => {
-    const { data } = props;
+export default ({data}) => {
+    //const { data } = props;
     // console.log(JSON.stringify(props.pathContext));
+    console.log(data.allImageSharp.edges.map(x => x.node.original.src));
 
-    let imagePath = Object.values(props.pathContext).map(x => x.node.original.src);
+    let imagePath=data.allImageSharp.edges.map(x => x.node.original.src);
+    
 
-    const business = (nameofbusiness) => {
-        if (nameofbusiness != null) {
+    //let imagePath = Object.values(props.pathContext).map(x => x.node.original.src);
+
+    const business=(nameofbusiness) => {
+        if(nameofbusiness!=null){
             return nameofbusiness;
         } else {
             return <div>Independent Trekking Guide</div>
         }
     }
 
-    const guidingSince = (datestring) => {
-        var year = datestring.substring(datestring.lastIndexOf('-') + 1, datestring.length);
+     const guidingSince=(datestring) => {
+        var year=datestring.substring(datestring.lastIndexOf('-')+1,datestring.length);
         return year;
     }
 
-    const getAge = (datestring) => {
+    const getAge=(datestring) => {
         var parts = datestring.split("-");
         var today = new Date();
         var birthDate = new Date(parts[2], parts[1] - 1, parts[0]);
@@ -136,83 +129,84 @@ export default (props) => {
             age--;
         }
         return age;
-    }
+      }
 
-    const marriedKids = (ismarried, haskids) => {
-        if (ismarried || haskids) {
-            if (haskids) {
-                var married = (<span>, Married with kids</span>)
-            } else {
-                married = (<span>, Married</span>)
+    const marriedKids=(ismarried,haskids) => {
+        if(ismarried||haskids){
+            if(haskids){
+                var married=(<span>, Married with kids</span>)
+            } else{
+                married=(<span>, Married</span>)
             }
         }
         return married;
     }
-
-    const reviews = (raters) => {
-        if (raters) {
+    
+    const reviews=(raters) => {
+        if(raters){
             return raters
         } else {
             return <span>No</span>
+                 }
         }
-    }
-
+            
     return (
         <div>
             <Layout>
                 <h6 className={numberofGuides}>Found {data.allMongodbTestGuides.edges.length} guides for treks and hikes in the Indian Himalayas.
       </h6>
-                <div className={cards}>
-                    {data.allMongodbTestGuides.edges.map(({ node }, index) => (
-                        <div className={incards}>
-                            <div className={spacing}></div>
-                            <div className={card} key={index}>
-                                <Link to="/guideprofile/" className={cardTitle}><h5 className={cardh}>{business(node.businessname)}</h5></Link>
+      
+      <div className={cards}>
+                    {data.allMongodbTestGuides.edges.map(({ node }, index) =>(
+                      <div className={incards}>  
+                    <div className={spacing}></div>
+                        <div className={card} key={index}>
+                            <Link to={'/guideprofile'} className={cardTitle}><h5 className={cardh}>{business(node.businessname)}</h5></Link>
 
 
-                                <Sharebuttons url={"https://sherpafeet.com/" + "guide/" + node.uid} />
-                                <Link to="#" className={cardimg}><img src={imagePath.find(x => x.includes(node.uid))} /></Link>
+                        <Sharebuttons url={"https://sherpafeet.com/" + "guide/" + node.uid}/>
+                            <Link to="#" className={cardimg}><img src={imagePath.find(x=> x.includes(node.uid))}/></Link>
+                        
 
-
-
-                                <div className={cardBlock}>
-                                    <span><strong>{node.firstname} {node.lastname}</strong></span>
-                                    <div>Age {getAge(node.dateofbirth)}{marriedKids(node.married, node.haschildren)}</div>
-                                    <div>{node.address.city}, {node.address.state}</div>
-                                    <div>Guiding work since <strong>{guidingSince(node.startwork)}</strong></div>
-                                    <Ratings initialRating={node.rating} />
-                                    <div><strong>{reviews(node.raters)} Reviews</strong></div>
-                                    <div>
-
-
+                            
+                            <div className={cardBlock}>
+                                <span><strong>{node.firstname} {node.lastname}</strong></span>
+                                <div>Age {getAge(node.dateofbirth)}{marriedKids(node.married,node.haschildren)}</div>
+                                <div>{node.address.city}, {node.address.state}</div>
+                                <div>Guiding work since <strong>{guidingSince(node.startwork)}</strong></div>
+                                <Ratings initialRating={node.rating}/>
+                                 <div><strong>{reviews(node.raters)} Reviews</strong></div>
+                                <div>
+                                
+                            
                                         <Popover title="English" content="The guide can understand English.">
-                                            <Icon icon="speaking" />
+                                        <Icon icon="speaking" />
                                         </Popover>
-                                        <Popover title="Basic Mountaineering" content="The guide has completed a certification in Basic Mountaineering.">
-                                            <Icon icon="degree" />
-                                        </Popover>
+                                     <Popover title="Basic Mountaineering" content="The guide has completed a certification in Basic Mountaineering.">
+                                        <Icon icon="degree" />
+                                    </Popover>  
+                                                                    
+                                    <Popover title="Advanced Mountaineering" content="The guide has completed a certification in Advanced Mountaineering.">
+                                        <Icon icon="certificate" />
+                                    </Popover>
 
-                                        <Popover title="Advanced Mountaineering" content="The guide has completed a certification in Advanced Mountaineering.">
-                                            <Icon icon="certificate" />
-                                        </Popover>
-
-                                        <Popover title="Methods Of Instruction" content="The guide is a trained instructor.">
-                                            <Icon icon="degreecap" />
-                                        </Popover>
-                                        <Popover title="Search & Rescue" content="The guide has completed a certification in Search & Rescue.">
-                                            <Icon icon="firstaid" />
-                                        </Popover>
-
-
-
-                                    </div>
-
+                                    <Popover title="Methods Of Instruction" content="The guide is a trained instructor.">
+                                        <Icon icon="degreecap" />
+                                    </Popover>
+                                    <Popover title="Search & Rescue" content="The guide has completed a certification in Search & Rescue.">
+                                        <Icon icon="firstaid" />
+                                    </Popover>
+                                
 
 
                                 </div>
+        
+                                
 
                             </div>
+
                         </div>
+                       </div> 
 
                     ))}
                 </div>
@@ -256,8 +250,16 @@ export const query = graphql`
         }
       }
     }
-    
-    
-
+    allImageSharp{
+        edges{
+          node{
+            original {
+              src
+            }
+          }
+        }
+    }
   }
 `
+//<span>{iconwithpop(node.info.english)}</span>
+

@@ -18,7 +18,7 @@ const { Header, Content, Footer, Sider } = Layout;
  */
 
 const mainTheme = {
-    primaryColor: Color('#fd3d57'),
+    primaryColor: Color('#3b5998'),
     primaryTextColor: Color('#fff'),
   };
   
@@ -51,7 +51,64 @@ injectGlobal`
   .ant-menu-horizontal {
     border-bottom: 2px solid #ffffff;
   }
-`; 
+  .ant-btn{
+    background-color:#3b5998;
+    border-color:#3b5998;
+    &:hover {
+      background-color: rgba(59,89,152,0.6);
+      border-color:rgba(59,89,152,0.6);
+    }
+    &:focus {
+      background-color: rgba(59,89,152,0.6);
+      border-color:rgba(59,89,152,0.6);
+    }
+  }
+  .ant-btn {
+    &:hover {
+      border-color: ${defaultTheme.primaryColor
+        .lighten(0.2)
+        .toString()} !important;
+      color: ${defaultTheme.primaryColor.lighten(0.2).toString()} !important;
+    }
+
+    &:active {
+      border-color: ${defaultTheme.primaryColor
+        .darken(0.2)
+        .toString()} !important;
+      color: ${defaultTheme.primaryColor.darken(0.2).toString()} !important;
+    }
+  }
+
+  .ant-btn-primary {
+    background-color: ${defaultTheme.primaryColor.toString()} !important;
+    border-color: ${defaultTheme.primaryColor.toString()} !important;
+    color: ${defaultTheme.primaryTextColor.toString()} !important;
+
+    &:hover {
+      background-color: ${defaultTheme.primaryColor
+        .lighten(0.2)
+        .toString()} !important;
+      border-color: ${defaultTheme.primaryColor
+        .lighten(0.2)
+        .toString()} !important;
+      color: ${defaultTheme.primaryTextColor.toString()} !important;
+    }
+
+    &:active {
+      background-color: ${defaultTheme.primaryColor
+        .darken(0.2)
+        .toString()} !important;
+      border-color: ${defaultTheme.primaryColor
+        .darken(0.2)
+        .toString()} !important;
+      color: ${defaultTheme.primaryTextColor.toString()} !important;
+    }
+  }
+
+  .ant-btn-clicked:after {
+    border: 0 solid ${defaultTheme.primaryColor.toString()} !important;
+  }
+ `; 
 
 
 const SmallBanner = styled(Box)`
