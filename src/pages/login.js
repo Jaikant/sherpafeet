@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { css } from 'react-emotion';
 import { Link } from 'gatsby';
@@ -76,5 +77,3 @@ export default () => {
     </div>
     )
 }
-
-

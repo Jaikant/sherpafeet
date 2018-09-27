@@ -1,3 +1,5 @@
+
+import Layout from "../components/Layout";
 import React from 'react'
 import { Menu, Button, Icon, Row, Col } from 'antd'
 import { Box, Flex } from 'rebass'
@@ -83,6 +85,7 @@ class StyleGuide extends React.Component {
 
     render() {
         return (
+            <Layout>
             <Flex flexDirection="column" p={[4]} css={{ overflow: 'hidden' }}>
 
                <NavigationBar />
@@ -137,7 +140,8 @@ class StyleGuide extends React.Component {
                         This is an emotion component, using styled system.
                     </SFBox>
                 </Row>
-            </Flex>          
+            </Flex>   
+            </Layout>       
         )
     }
 }
