@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
 import Layout from '../components/Layout';
-import styled from 'react-emotion';
 import { graphql } from 'gatsby';
-import { Link } from 'gatsby';
+import Link_ from '../components/Link';
 import Scrollchor from 'react-scrollchor';
 import { Flex, Box, Border, Row, Column } from 'rebass';
 import GuideprofileLeft from '../components/Guideprofileleft';
@@ -12,15 +11,9 @@ import Guidetreks from '../components/Guideprofiletrek';
 import Aboutguide from '../components/Guideprofileabout';
 import Certifications from '../components/Guideprofilecertification';
 
-const Link_ = styled(Link)`
-    text-decoration:none;
-    color:rgba(59,89,152,.6);
-    &:hover {
-    color: #23527c;
-    }
-    font-size:18px;
-`
-export default ({ data }) => {
+export default (props) => {
+  const { data } = props;
+  console.log(props);
   return (
     <Fragment>
       <Layout>
@@ -31,11 +24,11 @@ export default ({ data }) => {
               <Guideinfo data={data} />
               <Box bg='#ffffff' mt={[290, 250, 160]}>
                 <Row pt={4} pl={[0, 3, 170]}>
-                <Flex flex={1} flexDirection={["column","row","row"]} alignItems={"center"}>
-                  <Column><Scrollchor to='#review' animate={{ offset: -100 }}><Link_>Reviews</Link_></Scrollchor></Column>
-                  <Column><Scrollchor to='#trek' animate={{ offset: -250 }}><Link_>Treks</Link_></Scrollchor></Column>
-                  <Column><Scrollchor to='#about' animate={{ offset: -250 }}><Link_>About</Link_></Scrollchor></Column>
-                  <Column><Scrollchor to='#link' animate={{ offset: -250 }}><Link_>Certifications</Link_></Scrollchor></Column>
+                  <Flex flex={1} flexDirection={["column", "row", "row"]} alignItems={"center"}>
+                    <Column><Scrollchor to='#review' animate={{ offset: -100 }}><Link_>Reviews</Link_></Scrollchor></Column>
+                    <Column><Scrollchor to='#trek' animate={{ offset: -250 }}><Link_>Treks</Link_></Scrollchor></Column>
+                    <Column><Scrollchor to='#about' animate={{ offset: -250 }}><Link_>About</Link_></Scrollchor></Column>
+                    <Column><Scrollchor to='#link' animate={{ offset: -250 }}><Link_>Certifications</Link_></Scrollchor></Column>
                   </Flex>
                 </Row>
               </Box>
@@ -52,36 +45,33 @@ export default ({ data }) => {
 }
 
 export const query = graphql`
-  query {
-            allMongodbTestGuides (filter:{uid:{eq:"RajeshThakur"}}){
-              edges{
-                node{
-                  uid
-                  businessname
-                  firstname
-                  lastname
-                  age
-                  address {
-                              city
-                              country
-                          }
-                  startwork
-                  rating
-                  raters
-                  about
-                  info {
-                      bmc
-                      amc
-                      moi
-                      english
-                      sar
-                    }
-                    treks {
-                      trekname
-                    }
-                }
-              }   
-                    }
+  query ($uid: String!){
+    mongodbTestGuides (uid:{eq:$uid}){
+          uid
+          businessname
+          firstname
+          lastname
+          age
+          address {
+                      city
+                      country
+                  }
+          startwork
+          rating
+          raters
+          about
+          info {
+              bmc
+              amc
+              moi
+              english
+              sar
+            }
+            treks {
+              trekname
+            }
+            }
+  
                     allImageSharp{
                         edges{
                           node {
@@ -92,7 +82,7 @@ export const query = graphql`
                           }
                         }
                       }
-                      allMongodbTestRatings(filter:{guideuid:{eq:"RajeshThakur"}}){
+                      allMongodbTestRatings(filter:{guideuid:{eq:$uid}}){
                         edges{
                           node{
                               id
@@ -136,7 +126,7 @@ export const query = graphql`
                           } 
                         }
                       }
-                      allMongodbTestDepartures(filter:{guideuid:{eq:"RajeshThakur"}}){
+                      allMongodbTestDepartures(filter:{guideuid:{eq:$uid}}){
                         edges{
                           node{
                             trekid

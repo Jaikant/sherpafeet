@@ -11,7 +11,6 @@ const Text_ = styled(Text)`
 const Carousel_ = styled(Carousel)`
     text-align: center;
     line-height: 160px;
-    background: rgba(59,89,152,0.6);
     overflow: hidden;
 `
 export default class Guidetreks extends Component {
@@ -25,7 +24,7 @@ export default class Guidetreks extends Component {
 
     render() {
 
-        let guide = (this.props.data.allMongodbTestGuides.edges.map(x=>x.node))[0];
+        let guide = this.props.data.mongodbTestGuides;
 
         let imagePath = this.props.data.allImageSharp.edges.map(x => x.node.original.src);
 
@@ -36,6 +35,7 @@ export default class Guidetreks extends Component {
         var result = {};
         keys.forEach((key, i) => result[key] = values[i]);
         const trekArray = Object.entries(result);
+        const imageCount = trekArray.length < 4 ? trekArray.length : 4;
 
         const { Meta } = Card;
 
@@ -43,10 +43,24 @@ export default class Guidetreks extends Component {
             <Box bg='white' mt={2} id='trek'>
                 <Title title={`${guide.firstname} ${guide.lastname}'s treks`} />
                 <Flex justifyContent='center'>
-                    <Box px={[2, 3, 4]} pt={3} width={1}>
-                        <Carousel_ autoplay slidesToShow={this.state.viewportWidth < 500 ? 1 : 4}>
+                    <Box px={[2, 3, 4]} pt={3} width={imageCount / 4}>
+                        <Carousel_ autoplay slidesToShow={this.state.viewportWidth < 500 ? 1 : imageCount}
+                            appendDots={dots => {
+                                return (
+                                    <div
+                                        style={{
+                                            backgroundColor: "#ddd",
+                                            borderRadius: "10px",
+                                            padding: "10px"
+                                        }}
+                                    >
+                                        <ul style={{ margin: "0px", color: "#000000" }}> {dots} </ul>
+                                    </div>
+                                )
+                            }}
+                        >
                             {trekArray.map(c =>
-                                <Card key={c[0]} hoverable style={{ width: 200 }} cover={<img style={{ marginBottom: 0 }} alt="example" src={c[1]} />}>
+                                <Card key={c[0]} hoverable cover={<img style={{ marginBottom: 0 }} alt="example" src={c[1]} />}>
                                     <Meta title={<Text_ children={c[0]} />} />
                                 </Card>
                             )}

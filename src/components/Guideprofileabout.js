@@ -6,7 +6,7 @@ export default class Aboutguide extends Component {
 
     render() {
 
-        let guide = (this.props.data.allMongodbTestGuides.edges.map(x=>x.node))[0];
+        let guide = this.props.data.mongodbTestGuides;
 
         return (
             <Box bg='white' mt={2} id='about'>
