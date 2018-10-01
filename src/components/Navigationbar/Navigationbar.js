@@ -90,7 +90,7 @@ class AntdMenu extends React.Component {
                         </Link>    
                     </Menu.Item>
                     <Menu.Item key="app2">
-                        <Link>
+                        <Link to='#'>
                             <Icon type="rocket" />Mission
                         </Link>
                     </Menu.Item>

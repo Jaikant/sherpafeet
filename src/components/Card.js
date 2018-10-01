@@ -109,7 +109,7 @@ const Card = (props) => {
                 />
             </Box>
         </AntdCard>
-    )
+    )   
 }
 
 export default Card;

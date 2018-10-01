@@ -101,7 +101,7 @@ export default (props) => {
     // console.log(JSON.stringify(props.pathContext));
 
     let imagePath = Object.values(props.pathContext).map(x => x.node.original.src);
-
+    // console.log(imagePath);
     const business=(nameofbusiness) => {
         if(nameofbusiness!=null){
             return nameofbusiness;
@@ -206,7 +206,7 @@ export default (props) => {
                         </div>
                  
                             <Link to="#" className={cardimg}><img src={imagePath.find(x=> x.includes(node.uid))}/></Link>
-                        
+                            
 
                             
                             <div className={cardBlock}>
