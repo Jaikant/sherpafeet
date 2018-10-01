@@ -122,8 +122,7 @@ export default ( props ) => {
     return (
         <Layout>
             <Flex flexDirection='column' justifyContent='center'>
-            <h6 className={numberofTreks}>Found {data.allMongodbTestTreks.edges.length} 
-            guides for treks in the {props.pathContext.region}
+            <h6 className={numberofTreks}>Found {data.allMongodbTestTreks.edges.length} treks in the {props.pathContext.region}
       </h6>
       
      <div className={cards}> {data.allMongodbTestTreks.edges.map(({ node }) =>(
