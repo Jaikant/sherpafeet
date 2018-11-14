@@ -24,7 +24,7 @@ module.exports = {
               {
                 resolve: `gatsby-source-mongodb`,
                 options: { dbName: `test`, 
-                           collection: [`guides`,`rating`,`usrs`,`treks`]
+                           collection: [`guides`,`ratings`,`usrs`,`blogs`,`departures`,`bookings`,`treks`]
                          }
               },
               {
@@ -44,7 +44,6 @@ module.exports = {
               },
               `gatsby-transformer-remark`,
               `gatsby-transformer-sharp`,
-             
               `gatsby-plugin-sharp`,
               `gatsby-plugin-antd`,
             ],

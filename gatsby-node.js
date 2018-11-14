@@ -1,52 +1,39 @@
+const path = require(`path`);
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions
+  new Promise((resolve, reject) => {
+    const guideProfileTemplate = path.resolve(`src/templates/guideprofile.js`)
+    resolve(
+      graphql(
+        `
+        {
+            allMongodbTestGuides {
+                edges{
+                  node{
+                    uid
+                  }
+                }   
+                      }   
+        }
+        `
+      ).then(result => {
+        if (result.errors) {
+          reject(result.errors)
+        }
+        result.data.allMongodbTestGuides.edges.forEach(edge => {
+          createPage({
+            path: `${edge.node.uid}`,
+            component: guideProfileTemplate,
+            context: {
+              uid: edge.node.uid
+            },
+          })
+        })
+      })
+     )}
+    )
 
-
-const path = require('path');
-// exports.createPages = ({graphql,actions}) =>
-// {
-//   const {createPage} = actions 
-//   return new Promise((resolve,reject) => {
-
-//     const treksTemplate = path.resolve(`src/templates/treks.js`)
-//      // Query for markdown nodes to use in creating pages.
-//      resolve(
-//        graphql(
-//          `
-//          {
-//           allMongodbTestTreks{
-//             edges{
-//                node{
-//                 region
-               
-//               }
-//             }
-//           }
-//          }
-//          `
-//        )
-//        .then(result=> {
-//         //  let regions = [`Indian-Himalayas`,`Uttarakhand`, `Ladakh`,`Spiti`,`Himachal-Pradesh`]
-//          if (result.errors){
-//            reject(result.errors)
-//          }
-//           region.map(region => {
-//          createPage({
-//            path:`${edge.node.region}`,
-//            component: treksTemplate ,
-//            context: 
-//                   {region:allMongodbTestTreks.edges.node.region}
-//          })
-//         })
-//          return
-//        })
-//      )
-// //   })
-// // }
-
-  
-  
-  exports.createPages = ({ graphql, actions }) => {
-    const { createPage } = actions
-    return new Promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
       const treksTemplate = path.resolve(`src/templates/treks.js`)
       // Query for markdown nodes to use in creating pages.
       resolve(
@@ -69,8 +56,6 @@ const path = require('path');
             reject(result.errors)
           }
           regions.map(region => {
-          // Create blog post pages.
-          // result.data.allMongodbTestTreks.edges.forEach(edge => {
               createPage({
                 path: `treks/${region}`, // required
                 component: treksTemplate,
@@ -83,11 +68,8 @@ const path = require('path');
                   // argument.
                 }
               })
-          })
-        
-          return
-        })
-      )
-    })
-  }
-  
+            })
+          })       
+         )}
+        )
+}
