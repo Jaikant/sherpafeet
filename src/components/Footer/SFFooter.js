@@ -18,7 +18,7 @@ const SFFooter=()=>(
         <Dot/>
         <StyledLink to="#">Blog</StyledLink>
         <Dot/>
-        <StyledLink to="#">Why</StyledLink>
+        <StyledLink to="/why/">Why</StyledLink>
         <Dot/>
         <StyledLink to="#">Must know</StyledLink>
         <Dot/>
@@ -26,7 +26,7 @@ const SFFooter=()=>(
         <Dot/>
         <StyledLink to="#">Terms & Conditions</StyledLink>
         <Dot/>
-        <StyledLink to="#">Privacy Policy</StyledLink>
+        <StyledLink to="privacy-policy">Privacy Policy</StyledLink>
         <Dot/>
         <StyledLink to="#">Contact</StyledLink>
         <Dot/>

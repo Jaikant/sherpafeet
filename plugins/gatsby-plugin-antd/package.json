@@ -14,13 +14,13 @@
   "author": "Brian Kimball",
   "license": "MIT",
   "dependencies": {
-    "antd": "^3.5.1",
-    "babel-plugin-import": "^1.7.0"
+    "antd": "3.8.4",
+    "babel-plugin-import": "1.8.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1"
+    "babel-cli": "6.26.0",
+    "babel-preset-es2015": "6.24.1",
+    "babel-preset-stage-0": "6.24.1"
   },
   "readme": "README.md",
   "scripts": {
