@@ -1,7 +1,6 @@
-// eslint-disable
-// this is an auto generated file. This will be overwritten
+import gql from 'graphql-tag';
 
-export const getSherpafeetRatings = `query GetSherpafeetRatings($guideuid: String!, $commentid: Int!) {
+export const getSherpafeetRatings = gql`query GetSherpafeetRatings($guideuid: String!, $commentid: Int!) {
   getSherpafeetRatings(guideuid: $guideuid, commentid: $commentid) {
     usr
     commentid
@@ -28,7 +27,7 @@ export const getSherpafeetRatings = `query GetSherpafeetRatings($guideuid: Strin
   }
 }
 `;
-export const listSherpafeetRatings = `query ListSherpafeetRatings(
+export const listSherpafeetRatings = gql`query ListSherpafeetRatings(
   $filter: TableSherpafeetRatingsFilterInput
   $limit: Int
   $nextToken: String

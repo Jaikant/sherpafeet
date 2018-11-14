@@ -1,5 +1,20 @@
 module.exports = {
     plugins: [`gatsby-plugin-emotion`,
+                {
+                  resolve: "gatsby-source-graphql",
+                  options: {
+                      // This type will contain the remote schema Query type
+                      typeName: "AWSAppSync",
+                      // This is the field under which it's accessible
+                      fieldName: "events",
+                      // URL to query from
+                      url: `${process.env.SF_AWS_APPSYNC_API_URL}`,
+                      headers: {
+                          "x-api-key": `${process.env.SF_AWS_APPSYNC_API_KEY}`
+                      },
+                      refetchInterval: 10,
+                  },
+              },
               {
                 resolve: `gatsby-plugin-typography`,
                 options: {
@@ -34,30 +49,4 @@ module.exports = {
               `gatsby-plugin-antd`,
             ],
   }
-
-/*
-
-module.exports = {
-  siteMetadata: {
-    title: `Pandas Eating Lots`,
-  },
-  plugins: [
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `src`,
-        path: `${__dirname}/src/`,
-      },
-    },
-    `gatsby-plugin-glamor`,
-    {
-      resolve: `gatsby-plugin-typography`,
-      options: {
-        pathToConfigModule: `src/utils/typography`,
-      },
-    },
-  ],
-};
-*/
-
   

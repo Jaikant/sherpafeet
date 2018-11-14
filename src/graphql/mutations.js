@@ -1,7 +1,6 @@
-// eslint-disable
-// this is an auto generated file. This will be overwritten
+import gql from 'graphql-tag';
 
-export const createSherpafeetRatings = `mutation CreateSherpafeetRatings($input: CreateSherpafeetRatingsInput!) {
+export const createSherpafeetRatings = gql`mutation CreateSherpafeetRatings($input: CreateSherpafeetRatingsInput!) {
   createSherpafeetRatings(input: $input) {
     usr
     commentid
@@ -28,7 +27,7 @@ export const createSherpafeetRatings = `mutation CreateSherpafeetRatings($input:
   }
 }
 `;
-export const updateSherpafeetRatings = `mutation UpdateSherpafeetRatings($input: UpdateSherpafeetRatingsInput!) {
+export const updateSherpafeetRatings = gql`mutation UpdateSherpafeetRatings($input: UpdateSherpafeetRatingsInput!) {
   updateSherpafeetRatings(input: $input) {
     usr
     commentid
@@ -55,7 +54,7 @@ export const updateSherpafeetRatings = `mutation UpdateSherpafeetRatings($input:
   }
 }
 `;
-export const deleteSherpafeetRatings = `mutation DeleteSherpafeetRatings($input: DeleteSherpafeetRatingsInput!) {
+export const deleteSherpafeetRatings = gql`mutation DeleteSherpafeetRatings($input: DeleteSherpafeetRatingsInput!) {
   deleteSherpafeetRatings(input: $input) {
     usr
     commentid
