@@ -14,7 +14,11 @@ export default class Review extends Component {
                 return <Text pl={[3, 3, 4]} pb={3}>No customer ratings yet, be the first one to rate {guide.firstname}!</Text>
             }
             else {
-                return <ShowReviews data={this.props.data} />
+                const { edges } = this.props.data.allMongodbTestRatings;
+                const  usrs  = this.props.data.allMongodbTestUsrs.edges;
+                return <ShowReviews 
+                            edges={edges} 
+                            usrs={usrs}/>
             }
         }
 

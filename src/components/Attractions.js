@@ -12,7 +12,7 @@ export default class Attractions extends Component {
 
     render() {
 
-        let usersArray = this.props.data.allMongodbTestUsrs.edges.map(x => x.node);
+        let usersArray = this.props.usrs.map(x => x.node);
 
         const attraction = (a) => {
             let b = a.attractions;
